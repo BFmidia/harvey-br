@@ -71,6 +71,24 @@ OPT_OUT_PATTERNS = (
     "never contact",
     "delete my info",
     "delete my data",
+    # --- Portugues do Brasil: a comparacao e substring em texto minusculo
+    # sem normalizar acento, entao cada frase entra nas duas grafias. ---
+    "nao quero mais receber", "n\u00e3o quero mais receber",
+    "nao quero receber mais", "n\u00e3o quero receber mais",
+    "nao desejo receber", "n\u00e3o desejo receber",
+    "me tira da lista", "me tire da lista", "me tirem da lista",
+    "sair da lista", "fora da lista", "me remova", "me remover", "remova meu",
+    "remover da lista", "remova da lista",
+    "descadastrar", "descadastre", "descadastro",
+    "cancelar inscricao", "cancelar inscri\u00e7\u00e3o",
+    "pare de enviar", "para de enviar", "pare de mandar", "para de mandar",
+    "nao envie mais", "n\u00e3o envie mais", "nao mande mais", "n\u00e3o mande mais",
+    "nao me envie mais", "n\u00e3o me envie mais",
+    "nao entre em contato", "n\u00e3o entre em contato",
+    "nao me procure", "n\u00e3o me procure",
+    "apague meus dados", "apagar meus dados",
+    "exclua meus dados", "excluir meus dados",
+    "tire meus dados", "tirar meus dados",
 )
 # "No thanks" (what cold email's footer asks for) as a phrase: not "no
 # Thanksgiving", "Bruno / Thanks," or "yes or no, thanks".
@@ -79,7 +97,11 @@ NO_THANKS_RE = re.compile(
     r"(?<!\bor )\bno,?[ \t]+thank(?:s|[ \t]+you)\b(?![ \t]+(?:needed|necessary|required))")
 # A reply that says only this (signature aside) is an opt-out ("Reply STOP").
 BARE_OPT_OUTS = {"stop", "unsubscribe", "remove", "remove me", "opt out",
-                 "no thanks", "no thank you"}
+                 "no thanks", "no thank you",
+                 # PT-BR: resposta de uma palavra so
+                 "sair", "parar", "pare", "remover", "descadastrar",
+                 "cancelar", "nao obrigado", "n\u00e3o obrigado",
+                 "nao obrigada", "n\u00e3o obrigada"}
 _MOBILE_SIGNATURE_RE = re.compile(
     r"^[ \t]*(?:sent from my \w[^\n]*|get outlook for \w[^\n]*|sent from \w+ mail[^\n]*)$",
     re.IGNORECASE | re.MULTILINE)
@@ -187,6 +209,14 @@ ESCALATION_PATTERNS = (
     "gdpr",
     "can-spam",
     "blacklist",
+    # --- Portugues do Brasil ---
+    "advogado", "advogada", "juridico", "jur\u00eddico",
+    "vou processar", "processo judicial",
+    "acao judicial", "a\u00e7\u00e3o judicial",
+    "notificacao extrajudicial", "notifica\u00e7\u00e3o extrajudicial",
+    "denunciar", "denuncia de spam", "den\u00fancia de spam",
+    "procon", "anpd", "lgpd",
+    "assedio", "ass\u00e9dio", "lista negra",
 )
 
 
