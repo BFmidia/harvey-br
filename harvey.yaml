@@ -1,87 +1,89 @@
 persona:
   name: "Harvey"
-  company: "Your Company"
-  role: "Business Development"
-  email: "harvey@yourcompany.com"
-  linkedin: "linkedin.com/in/harvey-yourcompany"
-  tone: "professional, consultative, confident"
+  company: "Sua Empresa"
+  role: "Comercial"
+  email: "harvey@suaempresa.com.br"
+  linkedin: "linkedin.com/in/harvey-suaempresa"
+  tone: "profissional, consultivo, seguro"
 
 product:
-  name: "Your Product"
-  description: "Describe what your product does and who it's for"
-  pricing: "Starting at $X/mo"
+  name: "Seu Produto"
+  description: "Descreva o que o seu produto faz e para quem ele é"
+  pricing: "A partir de R$ X/mês"
   key_benefits:
-    - "Benefit 1"
-    - "Benefit 2"
-    - "Benefit 3"
+    - "Benefício 1"
+    - "Benefício 2"
+    - "Benefício 3"
   objection_responses:
-    "too expensive": "I understand budget is important. Most of our clients see ROI within 30 days..."
-    "already have a solution": "That makes sense. Curious — what's the one thing you wish it did better?"
-    "not interested": "No worries at all. Mind if I ask what your current approach looks like?"
+    "está caro": "Entendo, orçamento é orçamento. A maior parte dos nossos clientes vê o retorno em 30 dias..."
+    "já tenho fornecedor": "Faz sentido. Curiosidade: o que você gostaria que ele fizesse e não faz?"
+    "não tenho interesse": "Sem problema. Posso perguntar como vocês resolvem isso hoje?"
   offer:
-    primary: ""                    # Main offer (e.g., "Monthly subscription starting at $99/mo")
-    entry: ""                      # Low-commitment entry (e.g., "14-day free trial", "Free audit")
-    goal: "book_call"              # Goal of outreach: book_call, start_trial, get_reply
+    primary: ""                    # Oferta principal (ex.: "Mensalidade a partir de R$ 497/mês")
+    entry: ""                      # Porta de entrada (ex.: "Diagnóstico gratuito", "7 dias de teste")
+    goal: "book_call"              # Objetivo: book_call, start_trial, get_reply
     booking_method: "calendar_link" # calendar_link, suggest_times, ask_preference
-    booking_url: ""                # Calendar link URL (if using calendar_link method)
-    meeting_duration: "15 minutes" # How long the call is
-    meeting_owner: ""              # Who takes the meeting (name or role)
+    booking_url: ""                # Link da agenda (se usar calendar_link)
+    meeting_duration: "15 minutos" # Duração da conversa
+    meeting_owner: ""              # Quem atende (nome ou cargo)
 
 icp:
   industries:
-    - "SaaS"
-    - "Marketing Agency"
-  company_size: "10-200 employees"
+    - "Agência de Marketing"
+    - "Clínica"
+  company_size: "10-200 funcionários"
   titles:
-    - "VP Marketing"
-    - "Head of Growth"
-    - "CMO"
-    - "Director of Marketing"
+    - "Sócio"
+    - "Diretor Comercial"
+    - "Gerente de Marketing"
+    - "Head de Growth"
   geography:
-    - "United States"
-  # Roles that signal a company is in-market RIGHT NOW (a company hiring a
-  # "Head of Growth" is shopping for growth tooling). Used for careers-page
-  # scanning and job-board discovery. Empty = fall back to titles above.
+    - "Brasil"
+  # Cargos que indicam que a empresa está comprando AGORA (quem contrata um
+  # "Head de Growth" está atrás de ferramenta de crescimento). Usado para
+  # varrer página de carreiras e site de vaga. Vazio = cai nos titles acima.
   hiring_signals: []
 
 channels:
   email:
     enabled: true
-    provider: "gmail"          # gmail (recommended) | microsoft | smtp | instantly
+    provider: "gmail"          # gmail (recomendado) | microsoft | smtp | instantly
     max_daily_sends: 50
-    require_approval: true      # native: review in Outbox; Instantly: sending held
-    # link_domains: ["mainsite.com"]   # your own sites besides the sending
-    #                                  # domain and booking link; on autopilot,
-    #                                  # an email linking elsewhere waits for you
-    send_to_risky: false        # also send to catch-all domains (off = safest)
-    max_bounce_rate: 0.05       # pause all sending if bounces exceed this
-    # New sending domain? Set start_date to the day your warmup service went
-    # on: no cold email for min_days, then the cold cap climbs from
-    # start_sends by daily_increase a day up to max_daily_sends. Replies are
-    # never held. Gmail/Microsoft/SMTP only (Instantly has its own warmup).
-    # Check readiness any time with `harvey warmup`.
-    # We recommend TrulyInbox for warmup: https://trulyinbox.com/?via=harvey
-    # Connect it (`harvey trulyinbox connect`) and `harvey warmup` reads
-    # whether this mailbox is actually warmed.
+    require_approval: true      # nativo: você revisa na Caixa de Saída; Instantly: envio retido
+    # link_domains: ["seusite.com.br"]  # outros sites seus além do domínio de
+    #                                   # envio e do link da agenda; no piloto
+    #                                   # automático, e-mail com link fora disso
+    #                                   # espera por você
+    send_to_risky: false        # enviar também para domínio catch-all (desligado = mais seguro)
+    max_bounce_rate: 0.05       # pausa o envio se o retorno passar disso
+    # Domínio de envio novo? Ponha em start_date o dia em que o aquecimento
+    # começou: nada de e-mail frio por min_days, e depois o teto sobe de
+    # start_sends por daily_increase ao dia até max_daily_sends. Resposta nunca
+    # é retida. Só gmail/microsoft/smtp (o Instantly tem aquecimento próprio).
+    # Confira quando quiser com `harvey warmup`.
+    # O projeto original recomenda o TrulyInbox para aquecer:
+    # https://trulyinbox.com/?via=harvey — ligue com
+    # `harvey trulyinbox connect` e o `harvey warmup` passa a ler se a
+    # caixa esta mesmo aquecida.
     warmup:
-      start_date: ""            # YYYY-MM-DD; blank = no ramp
+      start_date: ""            # AAAA-MM-DD; vazio = sem rampa
       min_days: 14
       start_sends: 5
       daily_increase: 3
-      dkim_selector: ""         # only if your provider uses an unusual one
-    # Send cold email only in office hours in each recipient's own time zone,
-    # worked out from the company's location or the country Precleared finds.
-    # Anyone Harvey can't place gets the window in usage.quiet_hours.timezone.
-    # Follow-ups move into the window; replies are never held. Quiet hours
-    # then stop prospecting and writing, not mail that's due.
-    # Gmail/Microsoft/SMTP only. Remove the # marks to switch it on.
+      dkim_selector: ""         # só se o seu provedor usar um fora do padrão
+    # Manda e-mail frio só em horário comercial no fuso de quem recebe,
+    # deduzido da localização da empresa ou do país. Quem o Harvey não
+    # conseguir localizar recebe na janela de usage.quiet_hours.timezone.
+    # Follow-up entra na janela; resposta nunca é retida.
+    # Só gmail/microsoft/smtp. Tire o # para ligar.
+    # Para o Brasil, 9h às 18h, de segunda a sexta:
     # send_window:
-    #   start: "08:00"
-    #   end: "17:00"
-    #   weekdays_only: true      # Monday to Friday, in every country
-    #   recipient_timezone: true  # false: one zone for everyone (quiet_hours.timezone)
+    #   start: "09:00"
+    #   end: "18:00"
+    #   weekdays_only: true       # segunda a sexta, em qualquer país
+    #   recipient_timezone: true  # false: um fuso só para todo mundo
   linkedin:
-    enabled: false             # explicit opt-in; credentials alone do not enable it
+    enabled: false             # precisa ser ligado na mão; ter credencial não liga
     max_daily_connections: 20
     max_daily_messages: 10
 
@@ -91,39 +93,35 @@ usage:
   quiet_hours:
     start: "22:00"
     end: "07:00"
-    timezone: "America/New_York"
+    timezone: "America/Sao_Paulo"
 
-# Optional: check each new recipient with Precleared (precleared.dev) before
-# the first cold email: may cold marketing email go to this address under UK
-# PECR, US CAN-SPAM, Canada's CASL, Germany's UWG and France's rules? Any other
-# answer holds the email back, with the reason in the Outbox. One check per
-# address; 10 a day free without a key, 25 with a free key (PRECLEARED_API_KEY
-# in .env). Applies to the native providers (gmail, microsoft, smtp). If all
-# your prospects are in one country, set prospect_country: Precleared uses it
-# only when it can't tell the country from the address, company records or the
-# company's website.
+# LEI BRASILEIRA — leia antes de ligar o envio.
+# A LGPD não proíbe e-mail frio B2B, mas exige base legal (legítimo interesse,
+# art. 7º, IX), transparência sobre de onde veio o dado e um caminho fácil de
+# oposição. Na prática, para o Brasil isso quer dizer: deixe claro quem está
+# mandando, diga de onde você tirou o contato quando perguntarem, e atenda o
+# pedido de saída na hora. O campo postal_address abaixo existe porque a lei
+# americana (CAN-SPAM) exige endereço postal; no Brasil ele não é exigido, mas
+# preencher com o endereço da empresa ajuda a entregabilidade e não atrapalha.
+# Isto é a leitura do autor do fork, não é parecer jurídico.
 compliance:
-  # Added under every cold email (never replies). US law (CAN-SPAM) requires a
-  # postal address you receive mail at: a street address, PO box or virtual
-  # mailbox. Until it's set, cold email still sends, with a warning.
   postal_address: ""
-  # Keep wording Harvey recognises as an opt-out ("no thanks", "unsubscribe").
-  opt_out_line: 'Not interested? Reply "no thanks" and I won''t email again.'
-  # Never email these, cold or in reply: competitors, your existing customers,
-  # anyone under a legal hold. An entry is an address or a domain, and a domain
-  # covers its subdomains ("acme.example" also blocks "mail.acme.example", but
-  # not "notacme.example"). Checked by the gate at send time, so it holds even
-  # for an email you already approved in the Outbox, and picked up by a running
-  # Harvey at once. If you trained Harvey, set it in harvey.local.yaml instead:
-  # that file wins.
+  # Mantenha palavras que o Harvey reconhece como pedido de saída.
+  opt_out_line: 'Não quer mais receber? Responda "sair" que eu não mando de novo.'
+  # Nunca envie para estes, nem frio nem em resposta: concorrente, cliente seu,
+  # quem estiver em disputa jurídica. Cada entrada é um e-mail ou um domínio, e
+  # o domínio cobre os subdomínios ("acme.example" também bloqueia
+  # "mail.acme.example", mas não "naoacme.example"). Checado na hora do envio,
+  # então vale até para e-mail que você já aprovou na Caixa de Saída. Se você
+  # treinou o Harvey, ponha em harvey.local.yaml: aquele arquivo ganha.
   do_not_contact: []
-  #   - "competitor.example"
-  #   - "jane@acme.example"
+  #   - "concorrente.example"
+  #   - "joao@acme.example"
+  # O Precleared checa se a lei permite mandar e-mail frio para um endereço,
+  # mas cobre Reino Unido, Estados Unidos, Canadá, Alemanha e França — não
+  # cobre o Brasil. Deixe desligado se os seus leads são brasileiros.
   precleared:
     enabled: false
-    sender_country: ""          # GB or US: where your business is based
+    sender_country: ""          # GB ou US: onde a sua empresa está
     address_source: "unknown"   # published | bought | scraped | given | unknown
-    prospect_country: ""        # optional, e.g. US if all your prospects are in one country
-    # Harvey also tells Precleared the recipient's country when the company's
-    # location makes it certain, and the company's and person's names when
-    # it has them (see docs/precleared.md).
+    prospect_country: ""        # opcional, ex.: US se todos os leads são de um país só

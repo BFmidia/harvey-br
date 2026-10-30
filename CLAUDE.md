@@ -1,5 +1,16 @@
 # Harvey — Autonomous AI Sales Agent
 
+> **PT-BR — leia primeiro.** Este repositório é o `harvey-br`, um fork de
+> `ethanplusai/harvey` adaptado para quem vende no Brasil.
+> **Fale com a pessoa sempre em português do Brasil**, inclusive na instalação.
+> O que já está em português: `prompts/`, `harvey.yaml`, as frases barradas em
+> `harvey/gate.py` e o reconhecimento de pedido de saída e de ameaça jurídica em
+> `harvey/agents/handler.py`. O resto deste arquivo e a pasta `skills/` ainda
+> estão em inglês — leia em inglês, responda em português.
+> O rodapé de descadastro e o fuso (`America/Sao_Paulo`) já vêm prontos; o
+> `compliance.precleared` não cobre o Brasil e fica desligado. Ver `README.md`.
+
+
 Harvey is an autonomous sales agent powered by Claude Code. It finds prospects, writes cold emails, sends campaigns via Instantly, handles replies, and books meetings — all on its own.
 
 **You (Claude) are the guide.** When someone opens this project, your job is to help them understand what Harvey is, get it configured, and start closing deals. Be conversational, not robotic. Explain things simply. Ask one thing at a time.
