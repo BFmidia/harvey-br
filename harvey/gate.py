@@ -12,8 +12,10 @@ import re
 import unicodedata
 from dataclasses import dataclass, field
 
-# Spam-filter and AI-tell phrases that must never appear in outgoing mail.
-# Mirrors prompts/writer.md; enforced here because prompts can be ignored.
+# Frases de filtro de spam e marcas de IA que nunca podem sair num e-mail.
+# Espelha prompts/writer.md; aplicado aqui porque prompt pode ser ignorado.
+# A comparacao e substring em texto minusculo, sem normalizar acento:
+# por isso toda frase acentuada entra tambem na grafia sem acento.
 BANNED_PHRASES = (
     "act now", "buy now", "click here", "click below", "limited time",
     "limited offer", "exclusive deal", "special offer", "risk-free",
@@ -25,6 +27,35 @@ BANNED_PHRASES = (
     "cutting-edge solution", "revolutionize your", "unlock your",
     "supercharge your", "as an ai", "i'm an ai", "i am an ai",
     "as a language model",
+
+    # --- Portugues do Brasil ---
+    # chamada de acao que cai no spam
+    "clique aqui", "clique abaixo", "clique agora", "compre agora",
+    "cadastre-se agora", "aproveite agora", "garanta agora",
+    # urgencia fabricada
+    "oferta imperdivel", "oferta imperd\u00edvel", "oferta exclusiva",
+    "ultimas vagas", "\u00faltimas vagas", "vagas limitadas", "tempo limitado",
+    "ultima chance", "\u00faltima chance", "nao perca", "n\u00e3o perca",
+    # promessa de dinheiro
+    "ganhe dinheiro", "renda extra", "dobre seu", "dobre suas",
+    "100% gratis", "100% gr\u00e1tis", "totalmente gratis", "totalmente gr\u00e1tis",
+    "sem risco", "risco zero", "custo zero", "garantia total",
+    "resultado garantido", "resultados garantidos",
+    "voce foi selecionado", "voc\u00ea foi selecionado",
+    "voce ganhou", "voc\u00ea ganhou",
+    # abertura de e-mail frio batida
+    "espero que esteja bem", "espero que esteja tudo bem",
+    "tudo certo por ai", "tudo certo por a\u00ed",
+    "venho por meio deste", "venho por meio desta",
+    "gostaria de apresentar", "estou entrando em contato porque",
+    "so passando pra saber", "s\u00f3 passando pra saber",
+    "dando um follow up", "vale uma conversa rapida",
+    "vale uma conversa r\u00e1pida", "adoraria",
+    # marca de IA em portugues
+    "imagine so", "imagine s\u00f3", "e se eu te dissesse",
+    "nos dias de hoje", "no mundo atual", "nesse cenario", "nesse cen\u00e1rio",
+    "divisor de aguas", "divisor de \u00e1guas",
+    "sou uma ia", "como uma ia", "como modelo de linguagem",
 )
 
 MAX_SUBJECT_LEN = 90

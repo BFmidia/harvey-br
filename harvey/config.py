@@ -372,13 +372,20 @@ class PreclearedConfig(BaseModel):
         return self
 
 
-DEFAULT_OPT_OUT_LINE = 'Not interested? Reply "no thanks" and I won\'t email again.'
+DEFAULT_OPT_OUT_LINE = 'Não quer mais receber? Responda "sair" que eu não mando de novo.'
 # The replies the Handler always honours as an opt-out on their own; an
 # opt_out_line must ask for one of them ("Reply STOP", 'reply "no thanks"').
+# PT-BR: as palavras que um brasileiro responde para sair da lista entram
+# aqui tambem, com e sem acento, porque a comparacao nao normaliza acento.
 OPT_OUT_WORDS = ("no thanks", "no thank you", "unsubscribe", "stop", "remove me",
-                 "opt out")
+                 "opt out",
+                 "sair", "parar", "pare", "remover", "descadastrar",
+                 "cancelar", "nao quero", "n\u00e3o quero",
+                 "me tira", "me tire", "me remova")
+# PT-BR: o pedido tambem pode vir como "Responda ...", nao so "Reply ...".
 _ASKS_FOR_OPT_OUT_RE = re.compile(
-    r"\breply(?:\s+with)?\s*[\"'\u201c\u2018]?\s*(?:"
+    r"\b(?:reply|respond|responda|responde|digite|escreva)(?:\s+(?:with|com))?"
+    r"\s*[\"'\u201c\u2018]?\s*(?:"
     + "|".join(re.escape(w) for w in OPT_OUT_WORDS) + r")\b", re.IGNORECASE)
 
 

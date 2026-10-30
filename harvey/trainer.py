@@ -342,12 +342,17 @@ LEARNED_FIELDS = {
 # The shipped template's placeholder company: a persona still carrying it
 # was never set up, so training fills in the whole persona.
 UNTRAINED_COMPANY = "Your Company"
+# PT-BR: o template deste fork traz o mesmo lugar-vazio em portugues. Sem
+# isto, `harvey train` acharia a persona ja configurada e mandaria e-mail
+# com o remetente de exemplo.
+UNTRAINED_COMPANY_PT = "Sua Empresa"
+UNTRAINED_COMPANIES = (UNTRAINED_COMPANY, UNTRAINED_COMPANY_PT)
 
 
 def _persona_untrained(persona) -> bool:
     return (
         not isinstance(persona, dict)
-        or persona.get("company") == UNTRAINED_COMPANY
+        or persona.get("company") in UNTRAINED_COMPANIES
         or not persona.get("email")
     )
 
