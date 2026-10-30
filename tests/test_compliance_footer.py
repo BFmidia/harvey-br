@@ -202,11 +202,11 @@ async def _reply(state, body, intent="interested"):
 @pytest.mark.parametrize("body", [
     GMAIL_QUOTE, OUTLOOK_QUOTE,
     # An HTML-only reply converted to text keeps its entities.
-    "Sounds interesting.\n\nOn Tue Harvey wrote:\nNot interested? Reply &quot;no thanks&quot; "
-    "and I won&#39;t email again.",
+    "Sounds interesting.\n\nOn Tue Harvey wrote:\nNão quer mais receber? Responda &quot;sair&quot; "
+    "que eu não mando de novo.",
     # Gmail re-wraps long quoted lines.
-    "Sounds interesting.\n\nOn Tue Harvey wrote:\n> Not interested? Reply \"no\n> thanks\" "
-    "and I won't email again.",
+    "Sounds interesting.\n\nOn Tue Harvey wrote:\n> Não quer mais receber? Responda \"sa\n> ir\" "
+    "que eu não mando de novo.",
 ], ids=["gmail", "outlook", "html-entities", "gmail-wrapped"])
 async def test_our_own_quoted_footer_never_reads_as_an_opt_out(state, body):
     status, prompts = await _reply(state, body)
@@ -335,7 +335,7 @@ async def test_our_quoted_email_never_reaches_the_model_even_unrecognised(state)
     sent = "A short, plain note. Question?\n\n" + ADDRESS + "\n" + LINE
     status, prompts = await _reply_after_sending(state, DUTCH_OUTLOOK, sent_bodies=[sent])
     assert status != "opted_out"
-    assert prompts and all("no thanks" not in p.lower() for p in prompts)
+    assert prompts and all("mando de novo" not in p.lower() for p in prompts)
     assert any("Klinkt goed" in p for p in prompts)
 
 
@@ -343,7 +343,7 @@ async def test_our_quoted_email_never_reaches_the_model_even_unrecognised(state)
 async def test_a_footer_cut_off_by_the_length_limit_is_not_an_opt_out(state):
     sent = "A short, plain note. Question?\n\n" + ADDRESS + "\n" + LINE
     body = ("Interested, tell me more.\n\nOn Tue Harvey wrote:\n> A short, plain note. Question?\n> "
-            + ADDRESS + '\n> Not interested? Reply "no thanks"')  # truncated here
+            + ADDRESS + '\n> Não quer mais receber? Responda "sair"')  # truncated here
     status, _ = await _reply_after_sending(state, body, sent_bodies=[sent])
     assert status != "opted_out"
 
@@ -431,16 +431,16 @@ async def test_an_html_only_reply_quoting_our_footer_is_not_an_opt_out(state):
     # Tags become spaces: their words and our quote end up on one line.
     body = ("Yes, interested. Tuesday works.   On Tue, Oct 14, 2026 Harvey wrote:   "
             "A short, plain note. Question?   " + ADDRESS + "   "
-            "Not interested? Reply &quot;no thanks&quot; and I won&#39;t email again.")
+            "Não quer mais receber? Responda &quot;sair&quot; que eu não mando de novo.")
     status, prompts = await _reply_after_sending(state, body, sent_bodies=[SENT])
     assert status != "opted_out"
-    assert prompts and all("no thanks" not in p.lower() for p in prompts)
+    assert prompts and all("mando de novo" not in p.lower() for p in prompts)
 
 
 @pytest.mark.asyncio
 async def test_short_wrapped_fragments_of_our_quote_are_ours(state):
     body = ("Sure, call me.\n\nOn Tue Harvey wrote:\n> A short, plain note. Question?\n"
-            "> Not interested? Reply\n> \"no thanks\"\n> and I won't email again.")
+            "> Não quer mais receber? Responda\n> \"sair\"\n> que eu não mando de novo.")
     status, _ = await _reply_after_sending(state, body, sent_bodies=[SENT])
     assert status != "opted_out"
 

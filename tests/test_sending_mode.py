@@ -317,7 +317,8 @@ def test_the_writer_keeps_a_symlinked_config_a_symlink(tmp_path, yaml_file):
 
 def test_a_file_that_isnt_utf8_is_refused_not_mangled(tmp_path, yaml_file):
     path = tmp_path / "latin.yaml"
-    path.write_bytes(yaml_file.read_bytes().replace(b"# native", "# café native".encode("latin-1")))
+    # PT-BR: a ancora e um comentario que existe no harvey.yaml deste fork.
+    path.write_bytes(yaml_file.read_bytes().replace(b"# gmail", "# café gmail".encode("latin-1")))
     before = path.read_bytes()
     with pytest.raises(ConfigError):
         set_require_approval(False, path)
